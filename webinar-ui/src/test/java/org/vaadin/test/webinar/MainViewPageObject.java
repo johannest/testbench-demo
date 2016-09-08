@@ -35,6 +35,25 @@ public class MainViewPageObject extends TestBenchTestCase {
 	public String getProductGridsCellsText(int row, int col) {
 		return getProductGrid().getCell(row, col).getText();
 	}
+	
+	public boolean thereIsExactlyNRows(int n) {
+		try {
+			// nth row should exists
+			getProductGrid().getRow(n-1).isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+		
+		try {
+			// but (n+1)th row should not exist
+			getProductGrid().getRow(n).isDisplayed();
+		} catch (Exception e) {
+			return true;
+		}
+		
+		// also (n+1)th row existed
+		return false;
+	}
 
 	public void filterProducts(String filterText) {
 		filterField.sendKeys(filterText);

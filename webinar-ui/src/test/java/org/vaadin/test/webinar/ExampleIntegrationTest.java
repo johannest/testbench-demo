@@ -57,6 +57,7 @@ public class ExampleIntegrationTest  extends TestBenchTestCase {
 	private void verifyThatBookExistsInTheProductGrid(MainViewPageObject mainView) {
 		mainView.filterProducts(TESTBOOKNAME);
 		Assert.assertEquals(TESTBOOKNAME, mainView.getProductGridsCellsText(0,1));
+		Assert.assertTrue(mainView.thereIsExactlyNRows(1));
 		// ...
 	}
 	
