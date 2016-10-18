@@ -1,0 +1,1 @@
+{"rpc":[["pform-save","com.vaadin.shared.ui.button.ButtonServerRpc","click",[{"altKey":false,"button":"LEFT","clientX":1127,"clientY":511,"ctrlKey":false,"metaKey":false,"relativeX":118,"relativeY":18,"shiftKey":false,"type":1}]]],"syncId":${syncId},"clientId":${clientId}}

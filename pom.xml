@@ -9,7 +9,7 @@
 	<name>webinar-parent</name>
 
 	<properties>
-		<vaadin.version>7.6.7</vaadin.version>
+		<vaadin.version>7.7.3</vaadin.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<project.source.version>1.8</project.source.version>
@@ -99,8 +99,18 @@
 			<snapshots>
 			</snapshots>
 		</repository>
+		  <repository>
+    <id>vaadin-prereleases</id>
+    <name>Vaadin Pre-releases</name>
+    <url>https://maven.vaadin.com/vaadin-prereleases</url>
+  </repository>
 	</repositories>
-
+<pluginRepositories>
+				<pluginRepository>
+					<id>vaadin-prereleases</id>
+					<url>http://maven.vaadin.com/vaadin-prereleases</url>
+				</pluginRepository>
+			</pluginRepositories>
 	<profiles>
 		<profile>
 			<!-- Vaadin pre-release repositories -->
@@ -115,12 +125,7 @@
 					<url>http://maven.vaadin.com/vaadin-prereleases</url>
 				</repository>
 			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>vaadin-prereleases</id>
-					<url>http://maven.vaadin.com/vaadin-prereleases</url>
-				</pluginRepository>
-			</pluginRepositories>
+			
 		</profile>
 	</profiles>
   <modules>
