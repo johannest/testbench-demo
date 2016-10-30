@@ -1,6 +1,5 @@
 package org.vaadin.test.webinar;
 
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 
 import org.vaadin.johannest.diagnosticservlet.DiagnosticAndTestServlet;
@@ -68,10 +67,7 @@ public class MyUI extends UI {
         return accessControl;
     }
 
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = false 
-    		,initParams = {
-            @WebInitParam(name = "disable-xsrf-protection", value = "true")}
-    )
+    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = false)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends DiagnosticAndTestServlet {
     }
