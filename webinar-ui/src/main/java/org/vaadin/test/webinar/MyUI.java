@@ -1,14 +1,5 @@
 package org.vaadin.test.webinar;
 
-import javax.servlet.annotation.WebServlet;
-
-import org.vaadin.johannest.diagnosticservlet.DiagnosticAndTestServlet;
-import org.vaadin.test.webinar.samples.MainScreen;
-import org.vaadin.test.webinar.samples.authentication.AccessControl;
-import org.vaadin.test.webinar.samples.authentication.BasicAccessControl;
-import org.vaadin.test.webinar.samples.authentication.LoginScreen;
-import org.vaadin.test.webinar.samples.authentication.LoginScreen.LoginListener;
-
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Viewport;
@@ -16,8 +7,16 @@ import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
+import org.vaadin.test.webinar.samples.MainScreen;
+import org.vaadin.test.webinar.samples.authentication.AccessControl;
+import org.vaadin.test.webinar.samples.authentication.BasicAccessControl;
+import org.vaadin.test.webinar.samples.authentication.LoginScreen;
+import org.vaadin.test.webinar.samples.authentication.LoginScreen.LoginListener;
+
+import javax.servlet.annotation.WebServlet;
 
 /**
  * Main UI class of the application that shows either the login screen or the
@@ -69,6 +68,6 @@ public class MyUI extends UI {
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = false)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
-    public static class MyUIServlet extends DiagnosticAndTestServlet {
+    public static class MyUIServlet extends VaadinServlet {
     }
 }

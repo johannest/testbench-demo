@@ -32,8 +32,8 @@ public class MyUITest extends TestBenchTestCase {
 				withNumberOfConcurrentUsers(1).
 				withRampUpTimeInSeconds(1).
 				withTestName("MyUI_ScalabilityTest").
-				withPath("/Users/jotatu/Desktop/gatling").
-				withResourcesPath("/Users/jotatu/Desktop/gatling").
+				withPath("C:\\dev\\gatling7").
+				withResourcesPath("C:\\dev\\gatling7").
 				withStaticResourcesIngnoring().
 				withTestRefactoring().
 				build();
