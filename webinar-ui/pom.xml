@@ -1,79 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<artifactId>webinar</artifactId>
-		<groupId>org.vaadin.test</groupId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.7.RELEASE</version>
+	</parent>
+
+	<groupId>org.vaadin</groupId>
 	<artifactId>webinar-ui</artifactId>
 	<name>webinar-ui</name>
 	<packaging>war</packaging>
 
+	<properties>
+		<vaadin.version>12.0.4</vaadin.version>
+		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
+		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
+		<project.source.version>1.8</project.source.version>
+		<project.target.version>1.8</project.target.version>
+		<project.encoding>UTF-8</project.encoding>
+		<springboot.version>2.0.7.RELEASE</springboot.version>
+		<vaadinspring.version>12.0.4</vaadinspring.version>
+	</properties>
+
+
 	<dependencies>
-		<!-- Versions for these are configured in the parent POM -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<version>${springboot.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-server</artifactId>
+			<artifactId>vaadin-bom</artifactId>
+			<version>${vaadin.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-core</artifactId>
+            <version>${vaadin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-push</artifactId>
+			<artifactId>mpr-v7</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-server</artifactId>
+			<version>7.7.15</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jsoup</groupId>
+					<artifactId>jsoup</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-elemental</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
+			<version>7.7.15</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiled</artifactId>
+			<scope>provided</scope>
+			<version>7.7.15</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>webinar-backend</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
 
-		<!-- Custom components -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>webinar-widgetset</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
-		<!-- Bean validation implementation -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.1.0.CR1</version>
-		</dependency>
-
-		<!-- Testing -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-
- 		<!-- LoadTestDriver -->
-		<dependency>
-			<groupId>org.vaadin.johannest</groupId>
-			<artifactId>loadtestdriver</artifactId>
-			<version>0.1.6</version>
-		</dependency> 
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-testbench</artifactId>
-			<version>4.2.2</version>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring</artifactId>
+			<version>10.1.1</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.25</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -93,30 +134,24 @@
 			</plugin>
 			<!-- The Jetty plugin allows us to easily test the development build by 
 				running jetty:run on the command line. -->
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.plugin.version}</version>
-				<configuration>
-					<scanIntervalSeconds>0</scanIntervalSeconds>
-				</configuration>
-			</plugin>
+			<!--<plugin>-->
+				<!--<groupId>org.eclipse.jetty</groupId>-->
+				<!--<artifactId>jetty-maven-plugin</artifactId>-->
+				<!--<version>${jetty.plugin.version}</version>-->
+				<!--<configuration>-->
+					<!--<scanIntervalSeconds>0</scanIntervalSeconds>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
 			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
-				<configuration>
-					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
-					<webappDirectory>${basedir}/target/classes/VAADIN/widgetsets</webappDirectory>
-					<draftCompile>false</draftCompile>
-					<compileReport>false</compileReport>
-					<style>OBF</style>
-				</configuration>
+				<version>7.7.15</version>
 				<executions>
 					<execution>
 						<goals>
-							<goal>update-theme</goal>
-							<!-- disabled by default to use on-the-fly theme compilation -->
-							<!-- <goal>compile-theme</goal> -->
+							<goal>resources</goal>
+							<goal>update-widgetset</goal>
+							<goal>compile</goal>
 						</goals>
 					</execution>
 				</executions>

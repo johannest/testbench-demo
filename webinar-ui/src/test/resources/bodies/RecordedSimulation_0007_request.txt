@@ -1,1 +1,0 @@
-{"rpc":[["new-product-bttn","com.vaadin.shared.ui.button.ButtonServerRpc","click",[{"altKey":false,"button":"LEFT","clientX":1164,"clientY":29,"ctrlKey":false,"metaKey":false,"relativeX":50,"relativeY":8,"shiftKey":false,"type":1}]]],"syncId":${syncId},"clientId":${clientId}}
